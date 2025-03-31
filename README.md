@@ -7,6 +7,12 @@ Wrapper program to add multi-profile support to [starship prompt](https://starsh
 This is a wrapper that forces `starship` to load different configs depending on the current working directory.
 The wrapper reads ~/.config/starship/profiles.toml, and uses the rules there to pick a starship config from ~/.config/starship/profiles/\*.toml, then invokes `starship`, forcing it to use the configuration file.
 
+This solves some open starship issues
+
+- https://github.com/starship/starship/issues/5533
+- https://github.com/starship/starship/issues/5672
+- https://github.com/starship/starship/issues/6555
+
 ## Motivation
 
 I want a different prompt configuration depending on the directory I'm in.
