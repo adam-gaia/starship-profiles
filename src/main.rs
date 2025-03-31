@@ -2,7 +2,7 @@ use anyhow::bail;
 use anyhow::Result;
 use directories::{BaseDirs, ProjectDirs};
 use env_logger::Env;
-use log::{debug, info, warn};
+use log::{debug, warn};
 use regex::Regex;
 use serde::Deserialize;
 use std::env;
@@ -97,7 +97,7 @@ fn main() -> Result<()> {
         Some(config) => {
             debug!("{:?}", config);
             let cwd = env::current_dir()?;
-            match config.matching_profile(&cwd, &home_dir) {
+            match config.matching_profile(&cwd, home_dir) {
                 Some(profile_name) => {
                     let profiles_dir = config_dir.join("profiles");
                     if !profiles_dir.is_dir() {
