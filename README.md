@@ -98,7 +98,7 @@ Should no patterns match, the wrapper will call starship without forcing a confi
   Direnv allows for setting env vars when entering a directory, then unsetting when leaving.
 
   ```bash
-  #.envrc
+  # ~/repo/nixpkgs/.envrc
   export STARSHIP="${HOME}/.config/starship/profiles/no-git.toml"
   ```
 
@@ -112,7 +112,7 @@ Should no patterns match, the wrapper will call starship without forcing a confi
     set-starship() {
      if [[ "$PWD" =~ ^/home/agaia/repo/big-project ]] || [[ "$PWD" =~ ^/home/agaia/repo/nixpkgs ]]; then
        export STARSHIP_CONFIG="$HOME/.config/starship/profiles/no-git.toml"
-     elif [[ "$PWD" =~ ^/home/agaia/repo/small- ]]; then
+     elif [[ "$PWD" =~ ^/home/agaia/repo/(.+)-scripts ]]; then
        export STARSHIP_CONFIG="$HOME/.config/starship/profiles/simple.toml"
      else
        unset STARSHIP_CONFIG
@@ -121,4 +121,18 @@ Should no patterns match, the wrapper will call starship without forcing a confi
     add-zsh-hook precmd set-starship
     ```
   - nushell
-    TODO
+    ```nu
+    $env.config = ($env.config | upsert hooks {
+      env_change: {
+          PWD: [
+              {|before, after|
+                  if $after == /home/agaia/repo/nixpkgs || $after == /home/agaia/repo/big-projects {
+                      load-env { STARSHIP_CONFIG: "/home/agaia/.config/starship/profiles/no-git.toml" }
+                  } else if $after =~ "/home/agaia/repo/(.+)-scripts" {
+                    load-env { STARSHIP_CONFIG: "/home/agaia/.config/starship/profiles/simple.toml" }
+                  }
+              }
+          ]
+      }
+    })
+    ```
