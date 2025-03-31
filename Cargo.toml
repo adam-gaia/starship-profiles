@@ -1,0 +1,18 @@
+[package]
+name = "starship-profiles"
+description = "Wrapper program to add multi-profile support to starship prompt"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/adam-gaia/starship-profiles"
+repository = "https://github.com/adam-gaia/starship-profiles"
+
+[dependencies]
+anyhow = "1.0.97"
+serde = { version = "1.0.219", features = ["derive"] }
+toml = "0.8.20"
+directories = "6.0.0"
+which = "7.0.2"
+log = "0.4.27"
+env_logger = "0.11.7"
+regex = "1.11.1"
