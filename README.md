@@ -94,7 +94,7 @@ Should no patterns match, the wrapper will call starship without forcing a confi
 
 ## Alternatives
 
-- [direnv](https://direnv.net/)
+- [direnv](https://direnv.net/):
   Direnv allows for setting env vars when entering a directory, then unsetting when leaving.
 
   ```bash
@@ -104,7 +104,7 @@ Should no patterns match, the wrapper will call starship without forcing a confi
 
   The downside is that I often git commit my .envrc files and don't want to (or can't) force my changes on other contributors.
 
-- shell hooks
+- shell hooks:
   Shell hooks can be simpler, but are obviously tied to the shell. The advantage to starship-profiles is that it is shell agnostic. starship-profiles makes it easier to add multiple rules
 
   - zsh
