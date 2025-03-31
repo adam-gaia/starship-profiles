@@ -1,0 +1,3 @@
+[[profile]]
+name = "no-git"
+patterns = ["~/repo/nixpkgs"]
