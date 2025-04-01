@@ -7,6 +7,10 @@ license = "MIT OR Apache-2.0"
 homepage = "https://github.com/adam-gaia/starship-profiles"
 repository = "https://github.com/adam-gaia/starship-profiles"
 
+[[bin]]
+name = "starship"
+path = "src/main.rs"
+
 [dependencies]
 anyhow = "1.0.97"
 serde = { version = "1.0.219", features = ["derive"] }
