@@ -14,6 +14,11 @@
     // {
       inherit cargoArtifacts;
       doCheck = false; # Don't run tests as part of the build. We run tests with 'nix flake check'
+
+      postInstall = ''
+        wrapProgram $out/bin/starship \
+          --prefix PATH : ${pkgs.starship}/bin
+      '';
     });
 in
   crate

@@ -35,6 +35,7 @@
       buildInputs =
         [
           # Add additional build inputs here
+          pkgs.makeWrapper # Needed for postInstall script in the default package
         ]
         ++ lib.optionals pkgs.stdenv.isDarwin [
           # Additional darwin specific inputs can be set here
