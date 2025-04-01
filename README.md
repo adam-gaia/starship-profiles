@@ -57,7 +57,7 @@ Using starship while working in this directory is super annoying. It would be gr
 ## Usage
 
 1. Create a '~/.config/starship/profiles.toml', that defines a list of profiles. Each profile contains a name and a list of patterns that trigger the profile.
-1. Invoke the wrapper provided in this repo, `starship-profiles`, in place of `starship`.
+1. Invoke the wrapper provided in this repo (also called `starship`) in place of the real `starship`.
 
 Take this profiles.toml for example:
 
