@@ -13,7 +13,6 @@ use std::path::PathBuf;
 use std::process::Command;
 
 const CONFIG_DIR_NAME: &str = "starship";
-const DEFAULT_STARSHIP_CONFIG: &str = "~/.config/starship.toml";
 const LOG_VAR: &str = "STARSHIP_PROFILES_LOG";
 
 fn expand_home(s: &str, home: &str) -> String {
@@ -79,8 +78,6 @@ fn main() -> Result<()> {
         bail!("Unable to find starship exec");
     };
 
-    let mut starship_config = DEFAULT_STARSHIP_CONFIG.to_string();
-
     let Some(base_dirs) = BaseDirs::new() else {
         bail!("Unable to get XDG base dirs");
     };
@@ -92,6 +89,11 @@ fn main() -> Result<()> {
 
     let config_dir = proj_dirs.config_dir();
     let config_file = config_dir.join("profiles.toml");
+
+    let mut cmd = &mut Command::new(&starship);
+    // Passthrough args
+    // Skip to move off arg0 (program name)
+    cmd = cmd.args(env::args().skip(1));
 
     match Config::from_file(&config_file)? {
         Some(config) => {
@@ -109,7 +111,8 @@ fn main() -> Result<()> {
 
                     debug!("Using profile: {}", profile.display());
 
-                    starship_config = profile.display().to_string();
+                    let starship_config = profile.display().to_string();
+                    cmd = cmd.env("STARSHIP_CONFIG", starship_config);
                 }
                 None => debug!("No matching profile for CWD"),
             }
@@ -117,12 +120,7 @@ fn main() -> Result<()> {
         None => warn!("No profiles config found"),
     };
 
-    let e = Command::new(&starship)
-        // Passthrough args
-        // Skip to move off arg0 (program name)
-        .args(env::args().skip(1))
-        .env("STARSHIP_CONFIG", starship_config)
-        .exec();
-
+    debug!("Running command {:#?}", cmd);
+    let e = cmd.exec();
     bail!("Error running subcommand: {:?}", e)
 }
