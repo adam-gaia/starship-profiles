@@ -17,7 +17,7 @@ This solves some open starship issues
 
 I want a different prompt configuration depending on the directory I'm in.
 Take this for example: The git status module is integral to my starship prompt.
-The downside is that starship runs `git status` is ran each time my prompt reloads, which can take a noticeable amount of time.
+The downside is that starship runs `git status` each time my prompt reloads, which can take a noticeable amount of time.
 
 Here are the timings in this repo:
 
