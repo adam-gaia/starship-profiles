@@ -18,6 +18,7 @@
       postInstall = ''
         wrapProgram $out/bin/starship \
           --prefix PATH : ${pkgs.starship}/bin
+        ln -s $out/bin/starship $out/bin/starship-profiles
       '';
     });
 in
