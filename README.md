@@ -12,6 +12,7 @@ This solves some open starship issues
 - https://github.com/starship/starship/issues/5533
 - https://github.com/starship/starship/issues/5672
 - https://github.com/starship/starship/issues/6555
+- https://github.com/starship/starship/issues/5555
 
 ## Motivation
 
@@ -69,15 +70,19 @@ patterns = ["~/repo/nixpkgs", "~/repo/big-project"]
 [[profile]]
 name = "simple"
 patterns = ["~/repo/(.+)-scripts"]
+
+[[profile]]
+name = "transient"
 ```
 
-This corresponds to two starship configuration "profiles", `~/.config/starship/profiles/no-git.toml` and `~/.config/starship/profiles/simple.toml`.
+This corresponds to three starship configuration "profiles", `~/.config/starship/profiles/no-git.toml`, `~/.config/starship/profiles/simple.toml`, and `~/.config/starship/profiles/transient.toml`.
 These profiles use [starship's configuration format](https://starship.rs/config/).
 
-When working in `~/repo/nixpkgs` (or one of its subdirectories), the no-git profile will be used.
-Likewise, the no-git profile will activate under `~/repo/big-project`.
-A different profile, 'simple' will activate in any directory ending with '-scripts'.
-Starship will read the standard config file everywhere else.
+- When working in `~/repo/nixpkgs` (or one of its subdirectories), the no-git profile will be used.
+- Likewise, the no-git profile will activate under `~/repo/big-project`.
+- The 'simple' profile will activate in any directory ending with '-scripts'.
+- The 'transient' profile matches no patterns and is only activated with `starship --profile transient` (See [here](https://www.nushell.sh/book/configuration.html#transient-prompts) for more info on transient prompts, for nushell. I think Zsh has something similar)
+  Starship will read the standard config file everywhere else.
 
 Some misc notes:
 
@@ -86,6 +91,8 @@ Some misc notes:
 - The name of each starship configuration file must exactly match the profile.name entry in the profiles.toml. Spaces and special characters aren't expressly forbidden, but I haven't tested that sort of thing
 - Full regex patterns are supported, but I've found in practice writing out full paths is best (like in the 'no-git' example patterns).
 - Regex matching does not require a full match, so subdirectories will also trigger their parents' profiles
+
+## Forcing a specific config regardless of
 
 ## How it works
 

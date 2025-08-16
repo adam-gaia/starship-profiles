@@ -20,3 +20,4 @@ which = "7.0.2"
 log = "0.4.27"
 env_logger = "0.11.7"
 regex = "1.11.1"
+clap = { version = "4.5.45", features = ["derive"] }
