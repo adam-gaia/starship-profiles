@@ -37,6 +37,7 @@ fn expand_home(s: &str, home: &str) -> String {
 #[derive(Debug, Deserialize)]
 struct Profile {
     name: String,
+    #[serde(default)]
     patterns: Vec<String>,
 }
 
